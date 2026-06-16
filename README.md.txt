@@ -1,23 +1,22 @@
-  Life Care Hospital Data Analytics Project
+ Life Care Hospital Data Analytics Project
 
  Project Overview
 
 This project was developed using MySQL and dummy healthcare data to simulate real-world hospital operations. The objective was to practice database design, SQL analysis, and data visualization while generating meaningful business insights.
 
-The project provides insights into patient admissions, case types, doctor availability, appointment status, and hospital billing performance using MySQL, Excel, and Tableau.
+The project provides insights into patient admissions, case types, doctor availability, appointment status, and hospital billing performance using MySQL, Excel, Tableau, and Power BI.
 
 The goal was to design a relational database, perform data analysis using SQL, create a master analytical dataset, and develop interactive dashboards to generate business insights.
 To help the better view of how much patient are admited under which case and the availability of doctor and there appointment and lastely there bills. 
 
-Tools Used
+ Tools Used
 
 * MySQL
 * SQL
 * Excel
 * Pivot Tables
 * Tableau
-
-
+* Power BI
 
  Project Workflow
 
@@ -28,6 +27,7 @@ Tools Used
 5. Built a master analytical table for reporting in excel.
 6. Created Excel Pivot Tables and Dashboard in excel .
 7. Developed Tableau Dashboard for interactive analysis.
+8. Built a Power BI Dashboard for advanced data modeling and interactive visualization.
 
  Database Structure
 
@@ -65,8 +65,7 @@ The database consists of multiple interconnected tables including:
 * Examined patient demographics and case types.
 * Analyzed payment methods and billing performance.
 
-
- Dashboard Features
+## Dashboard Features
 
  Excel Dashboard
 
@@ -84,19 +83,13 @@ The database consists of multiple interconnected tables including:
 * Revenue Trends
 * Healthcare Analytics
 
- Project Screenshots
+ Power BI Dashboard
 
-ERD diagram 
+* Dynamic Healthcare Insights
+* Advanced Data Modeling & Relationships
+* Interactive Cross-Filtering Slicers
+* Patient & Billing Performance Tracking
 
-![ER Diagram](hospital_management_diagram.png)
-
- Excel Dashboard
-
-![Excel Dashboard](dashboard_in_excel.png)
-
-Tableau Dashboard
-
-![Tableau Dashboard](tableau_dashboard.png)
 
 Skills Demonstrated
 
@@ -114,6 +107,6 @@ Skills Demonstrated
 
 Assad ur Rehman
 
-Aspiring Data Analyst | SQL | Excel | Tableau | Data Visualization
+Data Analyst | SQL | Excel | Tableau | Data Visualization
 
 LinkedIn profile URL : https://www.linkedin.com/in/assad-ur-rehman-645720355/
