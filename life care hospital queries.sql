@@ -204,3 +204,53 @@ AND a1.doctor_id = a2.doctor_id
 AND a1.appointment_date = a2.appointment_date 
 AND a1.appointment_id > a2.appointment_id ;
 ROLLBACK;
+
+USE lifecare_hospital;
+
+SELECT department_name , SUM(total_amount) AS dep_total
+FROM departments dep 
+JOIN doctors doc 
+ON dep.department_id = doc.department_id 
+JOIN records rec 
+ON doc.doctor_id = rec.doctor_id 
+JOIN patients pat 
+ON rec.patient_id = pat.patient_id
+JOIN billing bill 
+ON pat.patient_id = bill.patient_id 
+GROUP BY department_name ;
+
+SELECT CONCAT(first_name,' ',last_name) AS full_name , 
+CASE 
+	WHEN YEAR(date_of_birth) < 1980 THEN "Senior Citizen"
+    WHEN YEAR(date_of_birth)BETWEEN 1980 AND 1990 THEN "Adult"
+    WHEN YEAR(date_of_birth) > 1990 THEN "Child"
+ END AS patient_category
+ FROM patients ;
+ 
+ START TRANSACTION ;
+ DELETE FROM appointments 
+ WHERE status = "cancelled" AND DATE(appointment_date) < 2025-01-01 ;
+ROLLBACK;
+
+SELECT day_of_week , case_type ,COUNT(case_type) 
+FROM doctor_availability da 
+JOIN doctors doc 
+ON da.doctor_id = doc.doctor_id 
+JOIN records rec 
+ON doc.doctor_id = rec.doctor_id 
+JOIN patients pat 
+ON rec.patient_id = pat.patient_id 
+JOIN cases c 
+ON pat.patient_id = c.patient_id 
+GROUP BY day_of_week , case_type 
+HAVING case_type = "Emergency";
+
+
+
+
+
+
+
+
+
+
