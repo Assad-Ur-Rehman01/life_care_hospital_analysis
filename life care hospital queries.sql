@@ -298,11 +298,32 @@ FROM appointments
 GROUP BY status 
 HAVING status = "complete" OR status = "cancelled";
 
+SELECT CONCAT(first_name," ",last_name) AS full_name ,
+CASE 
+	WHEN total_amount > 10000 THEN "Platinum"
+    WHEN total_amount BETWEEN 5000 AND 10000 THEN "Gold"
+    WHEN total_amount < 5000 THEN "Silver"
+END AS patient_tier 
+FROM patients p 
+JOIN billing b 
+ON p.patient_id = b.patient_id ;
 
+SELECT patient_id ,CONCAT(first_name," ",last_name) AS full_name 
+FROM patients 
+WHERE patient_id NOT IN ( SELECT patient_id FROM appointments );
 
-
-
-
+SELECT department_name , 
+		CONCAT(first_name," ",last_name) AS full_name , 
+        status ,
+        DENSE_RANK() OVER( PARTITION BY department_name ORDER BY app.appointment_date ) AS dep_rank 
+FROM departments dep 
+JOIN doctors doc 
+ON dep.department_id = doc.department_id 
+JOIN appointments app 
+ON doc.doctor_id = app.doctor_id 
+WHERE status = "complete"
+ORDER BY dep_rank ;
+		
 
 
 
