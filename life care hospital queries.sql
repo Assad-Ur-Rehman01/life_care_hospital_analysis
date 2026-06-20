@@ -245,6 +245,66 @@ ON pat.patient_id = c.patient_id
 GROUP BY day_of_week , case_type 
 HAVING case_type = "Emergency";
 
+SELECT CONCAT(doc.first_name,' ',doc.last_name) AS full_name , 
+ii.description , SUM(total_amount) AS doc_total
+FROM doctors doc 
+JOIN records rec 
+ON doc.doctor_id = rec.doctor_id 
+JOIN patients pat 
+ON rec.patient_id = pat.patient_id
+JOIN billing bill 
+ON pat.patient_id = bill.patient_id 
+JOIN invoice_items ii 
+ON bill.bill_id = ii.bill_id
+WHERE ii.description LIKE "%doc%"
+GROUP BY full_name , ii.description 
+ORDER BY doc_total DESC ;
+
+SELECT total_amount ,
+CASE 
+	WHEN total_amount < 1000 THEN "Low Cost"
+    WHEN total_amount BETWEEN 1000 AND 5000 THEN "Medium Cost"
+    WHEN total_amount > 5000 THEN "High Cost"
+END AS bill_category
+FROM billing ;
+
+SELECT * from records ;
+
+SELECT CONCAT(first_name,' ',last_name) AS full_name ,
+payment_method 
+FROM patients p 
+JOIN billing bil
+ON p.patient_id = bil.patient_id 
+JOIN payments pay 
+ON bil.bill_id = pay.bill_id 
+WHERE payment_method = "Card";
+
+SELECT CONCAT(first_name,' ',last_name) AS full_name, 
+department_name
+FROM doctors doc
+JOIN departments dep 
+ON dep.department_id = doc.department_id 
+WHERE department_name =  "Cardiology" OR department_name = "Neurology" ;
+
+START TRANSACTION ;
+
+UPDATE billing 
+SET total_amount = 5500
+WHERE bill_id = 5 ;
+ROLLBACK ;
+
+SELECT status , COUNT(status) AS total 
+FROM appointments 
+GROUP BY status 
+HAVING status = "complete" OR status = "cancelled";
+
+
+
+
+
+
+
+
 
 
 
